@@ -55,7 +55,6 @@ app.post("/api/users", async (req, res) => {
   }catch(err){
     console.log(err)
   }
-  res.json({ hey: "Hi"})
 })
 
 app.post("/api/users/:_id/exercises", async (req, res) => {
@@ -112,7 +111,7 @@ app.post("/api/users/:_id/exercises", async (req, res) => {
 
     const exercises = await Exercise.find(filter).limit(+limit ?? 500)
 
-    const logs = exercises.map(e => ({
+    const log = exercises.map(e => ({
       description: e.description,
       duration: e.duration,
       date: e.date.toDateString()
@@ -122,7 +121,7 @@ app.post("/api/users/:_id/exercises", async (req, res) => {
       username: user.username,
       count: exercises.length,
       _id: user._id,
-      logs
+      log
     })
   })
 
